@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Module</title>
+    <link rel="stylesheet" href="./login.component.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url('https://img.freepik.com/free-photo/still-life-say-no-fast-fashion_23-2149669606.jpg?ga=GA1.1.13668973.1719419505&semt=ais_user');
+            background-size: 1350px 900px;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .login-container {
+            display: flex;
+            margin-left: 150px;
+            align-items: center;
+            width: 500px;
+        }
+
+        .login-box {
+            display: flex;
+            margin-left: 150px;
+            justify-content: center;
+            width: 400px;
+            height: 550px;
+            background: transparent;
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .signin-section,
+        .welcome-section {
+            width: 400px;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .signin-section h2,
+        .welcome-section h2 {
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-container {
+            margin-bottom: 20px;
+        }
+
+        .input-container label {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .input-icon {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .input-icon i {
+            position: absolute;
+            left: 10px;
+            color: #999;
+        }
+
+        .input-icon input {
+            width: 100%;
+            padding: 10px 10px 10px 30px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .btn {
+            padding: 10px;
+            background: #555bc4;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .btn:hover {
+            background: #8f94fb;
+        }
+
+        .signup-button {
+            padding: 10px;
+            background: white;
+            color: rgb(95, 13, 150);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        .signup-button:hover {
+            background: #f5f5f5;
+        }
+
+        .error {
+            font-size: 12px;
+            color: red;
+        }
+
+        .social-media-login {
+            padding: 0;
+            margin: 0;
+        }
+
+        .remember-me {
+            display: flex;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+
+        .forgot-password {
+            margin-left: 40px;
+        }
+
+        .facebook-btn,
+        .google-btn,
+        .instagram-btn {
+            padding: 10px;
+            color: whitesmoke;
+            border: 1px;
+            border-radius: 20px;
+            margin-left: 10px;
+        }
+
+        .facebook-btn {
+            background: blue;
+        }
+
+        .google-btn {
+            background: green;
+        }
+
+        .instagram-btn {
+            background: rgb(255, 0, 43);
+        }
+
+        .newAccount {
+            margin: 10px;
+        }
+
+        .signin-section form p {
+            text-decoration: none;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-box">
+        <div class="signin-section">
+            <h2>Sign In</h2>
+            <form [formGroup]="customerFormGroup" (ngSubmit)="onSubmit()">
+                <div class="input-container">
+                    <label for="email">Email</label>
+                    <div class="input-icon">
+                        <i class="fa-solid fa-envelope"></i>
+                        <input type="text" id="email" formControlName="email" placeholder="Email">
+                    </div>
+                    <div *ngIf="email.invalid && (email.dirty || email.touched)" class="error">
+                        <div *ngIf="email.errors['required']">Email is required.</div>
+                        <div *ngIf="email.errors['email']">Invalid email format.</div>
+                    </div>
+                </div>
+
+                <div class="input-container">
+                    <label for="password">Password</label>
+                    <div class="input-icon">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" id="password" formControlName="password" placeholder="Password">
+                    </div>
+                    <div *ngIf="password.invalid && (password.dirty || password.touched)" class="error">
+                        <div *ngIf="password.errors['required']">Password is required.</div>
+                    </div>
+                </div>
+
+                <button type="submit" style="background-color: #428de3; height:50px; border-radius: 10px;">Sign
+                    In</button>
+                <p>Don't have an account? <a routerLink="/register" style="text-decoration: none;">Register Here</a></p>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

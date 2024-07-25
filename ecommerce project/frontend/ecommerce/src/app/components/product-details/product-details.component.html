@@ -1,0 +1,23 @@
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col md-4">
+            <img [src]="product.imageUrl" alt="" style="width:400px; height: 400px;padding: 20px;">
+        </div>
+        <div class="col-md-4">
+            <h3>
+                {{product.name}}
+            </h3>
+            <p>{{product.unitPrice | currency : "INR"}}</p>
+            <hr />
+            <p>Stock : {{product.unitsInStock}}</p>
+            <p>Product Code : {{product.sku}}</p>
+            <p>Price : {{product.unitPrice}}</p>
+            <p>Description : {{product.description}}</p>
+            <p *ngIf="product.unitsInStock < 1" style="color: red">Out Of Stock</p>
+            <button (click)="addToCart(product)" class="btn btn-primary btn-sm">
+                Add To Cart
+            </button>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Module</title>
+    <link rel="stylesheet" href="./register.component.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 150vh;
+            margin: 0;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .register-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        .register-box {
+            display: flex;
+            justify-content: center;
+            width: 500px;
+            height: 800px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border: 1px solid white;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            /* Apply blur to the background */
+        }
+
+        .form-section,
+        .welcome-section {
+            width: 60%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .form-section h2,
+        .welcome-section h2 {
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .my-3 {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            font-size: 16px;
+            color: white;
+            /* Change text color to white for better visibility */
+            margin-bottom: 10px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .alert {
+            font-size: 12px;
+            color: red;
+        }
+
+        .btn {
+            padding: 10px;
+            background: #144d7a;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .btn:hover {
+            background: #8f94fb;
+        }
+
+        .signin-button {
+            padding: 10px;
+            background: white;
+            color: rgb(134, 61, 61);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        .signin-button:hover {
+            background: #f5f5f5;
+        }
+
+        .welcome-section {
+            background-color: #bc6c74;
+            color: white;
+            text-align: center;
+        }
+
+        .exist-account {
+            margin-top: 50px;
+        }
+    </style>
+</head>
+
+<body
+    style="background-image: url('https://img.freepik.com/premium-photo/modern-sneaker-store-city_198067-342224.jpg?ga=GA1.1.13668973.1719419505&semt=ais_user');">
+
+    <div class="register-container">
+        <div class="register-box">
+            <div class="form-section">
+                <h2>Register</h2>
+                <form [formGroup]="customerFormGroup" (ngSubmit)="onSubmit()">
+                    <div formGroupName="customer">
+                        <!-- First Name -->
+                        <div class="my-3">
+                            <label class="form-label">First Name:</label>
+                            <input type="text" class="form-control" formControlName="firstName" />
+                            <div *ngIf="firstName?.invalid && (firstName?.dirty || firstName?.touched)"
+                                class="alert alert-danger">
+                                <div *ngIf="firstName?.errors?.['required']">First Name is required.</div>
+                                <div *ngIf="firstName?.errors?.['pattern']">Only alphabets are allowed.</div>
+                            </div>
+                        </div>
+                        <!-- Last Name -->
+                        <div class="my-3">
+                            <label class="form-label">Last Name:</label>
+                            <input type="text" class="form-control" formControlName="lastName" />
+                            <div *ngIf="lastName?.invalid && (lastName?.dirty || lastName?.touched)"
+                                class="alert alert-danger">
+                                <div *ngIf="lastName?.errors?.['required']">Last Name is required.</div>
+                                <div *ngIf="lastName?.errors?.['pattern']">Only alphabets are allowed.</div>
+                            </div>
+                        </div>
+                        <!-- Email -->
+                        <div class="my-3">
+                            <label class="form-label">Email:</label>
+                            <input type="email" class="form-control" formControlName="email" />
+                            <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="alert alert-danger">
+                                <div *ngIf="email?.errors?.['required']">Email is required.</div>
+                                <div *ngIf="email?.errors?.['email']">Invalid email id.</div>
+                            </div>
+                        </div>
+                        <!-- Password -->
+                        <div class="my-3">
+                            <label class="form-label">Password:</label>
+                            <input type="password" class="form-control" formControlName="password" />
+                            <div *ngIf="password.invalid && (password.dirty || password.touched)"
+                                class="alert alert-danger">
+                                <div *ngIf="password.errors?.['required']">Password is required.</div>
+                            </div>
+                        </div>
+                        <!-- Mobile -->
+                        <div class="my-3">
+                            <label class="form-label">Mobile:</label>
+                            <input type="tel" maxlength="10" class="form-control" formControlName="mobile" />
+                            <div *ngIf="mobile.invalid && (mobile.dirty || mobile.touched)" class="alert alert-danger">
+                                <div *ngIf="mobile.errors?.['required']">Mobile is required.</div>
+                                <div *ngIf="mobile.errors?.['pattern']">Invalid mobile number.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Submit button -->
+                    <div class="d-grid">
+                        <input type="submit" value="Register" class="btn btn-primary" />
+                    </div>
+                    <div class="exist-account">
+                        <p>Already have an account?<a routerLink="/login">Sign In</a></p>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
